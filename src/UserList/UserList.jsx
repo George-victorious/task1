@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {useSelector} from "react-redux";
 import styled from "styled-components";
 import Popup from "./Popup";
+import Typography from "../shared/Typotraphy";
 
 const UserList = () => {
   const userList = useSelector(state => state.users.userList);
@@ -21,12 +22,12 @@ const UserList = () => {
       {userList.length
         ? userList.map((user, index) => (
           <UserRow key={user.email} uneven={index % 2} onClick={()=>setPopupUser(user)}>
-            <h3>{user.firstName + ' ' + user.lastName}</h3>
-            <p>{user.email}</p>
-            <p>{user.role}</p>
+            <Typography level={'h3'}>{user.firstName + ' ' + user.lastName}</Typography>
+            <Typography level={'p'}>{user.email}</Typography>
+            <Typography level={'p'}>{user.role}</Typography>
           </UserRow>
         ))
-        : <div>No users yet.</div>
+        : <Typography level={'p'}>No users yet.</Typography>
       }
       <button onClick={()=>setPopupUser(emptyUser)}>Add user</button>
       {
@@ -47,12 +48,12 @@ const UserRow = styled.div`
   }
   
   & :nth-child(n) {
-    text-align: center;
     width: 33.333%;
-  }
-  & :nth-child(2) {
+    text-align: center;
     border-left: 1px solid black;
-    border-right: 1px solid black;
+  }
+  & :first-child {
+    border: 0;
   }
 `;
 
