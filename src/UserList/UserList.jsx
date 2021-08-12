@@ -4,9 +4,6 @@ import styled from "styled-components";
 import Popup from "./Popup";
 
 const UserList = () => {
-  const userList = useSelector(state => state.users.userList);
-
-  const [popupUser,setPopupUser] = useState(null);
 
   const emptyUser = {
     id: new Date().getTime(),
@@ -14,6 +11,20 @@ const UserList = () => {
     lastName: '',
     email: '',
     role: 'user'
+  };
+
+  const userList = useSelector(state => state.users.userList);
+
+  const [popupUser,setPopupUser] = useState(null);
+  const [isOldUser,setIsOldUser] = useState(true);
+
+  const openPopup = () => {
+    setPopupUser(emptyUser);
+    setIsOldUser(false);
+  };
+  const closePopup = () => {
+    setPopupUser(null);
+    setIsOldUser(true);
   };
 
   return (
@@ -28,9 +39,9 @@ const UserList = () => {
         ))
         : <div>No users yet.</div>
       }
-      <button onClick={()=>setPopupUser(emptyUser)}>Add user</button>
+      <button onClick={openPopup}>Add user</button>
       {
-        popupUser && <Popup propsUser={popupUser} onClose={()=>setPopupUser(null)} />
+        popupUser && <Popup isOldUser={isOldUser} propsUser={popupUser} onClose={closePopup} />
       }
     </>
   );
