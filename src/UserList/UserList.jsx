@@ -9,37 +9,51 @@ const UserList = () => {
   const [popupUser,setPopupUser] = useState(null);
 
   const emptyUser = {
+    id: new Date().getTime(),
     firstName: '',
     lastName: '',
     email: '',
     role: 'user'
-  }
+  };
 
-    return (
-        <>
-          {userList.length
-            ? userList.map((user, index) => (
-              <UserRow key={user.email} uneven={index % 2} onClick={()=>setPopupUser(user)}>
-                <h3>{user.firstName + ' ' + user.lastName}</h3>
-                <p>{user.email}</p>
-                <p>{user.role}</p>
-              </UserRow>
-            ))
-            : <div>No users yet.</div>
-          }
-          <button onClick={()=>setPopupUser(emptyUser)}>Add user</button>
-          {
-            popupUser && <Popup propsUser={popupUser} onClose={()=>setPopupUser(null)} />
-          }
-        </>
-    );
+  return (
+    <>
+      {userList.length
+        ? userList.map((user, index) => (
+          <UserRow key={user.email} uneven={index % 2} onClick={()=>setPopupUser(user)}>
+            <h3>{user.firstName + ' ' + user.lastName}</h3>
+            <p>{user.email}</p>
+            <p>{user.role}</p>
+          </UserRow>
+        ))
+        : <div>No users yet.</div>
+      }
+      <button onClick={()=>setPopupUser(emptyUser)}>Add user</button>
+      {
+        popupUser && <Popup propsUser={popupUser} onClose={()=>setPopupUser(null)} />
+      }
+    </>
+  );
 };
 
 const UserRow = styled.div`
   padding: 10px;
   display: flex;
-  justify-content: space-between;
   background-color: ${props => props.uneven ? '#E2DCE5' : '#B2A2B9'};
+  border-top: 1px solid black;
+
+  &:first-child {
+    border: 0;
+  }
+  
+  & :nth-child(n) {
+    text-align: center;
+    width: 33.333%;
+  }
+  & :nth-child(2) {
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+  }
 `;
 
 export default UserList;
