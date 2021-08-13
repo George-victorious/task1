@@ -22,6 +22,9 @@ const usersReducer = createSlice({
         state.userList.splice(index,1,action.payload);
       }
     },
+    removeUser(state, action) {
+      state.userList = state.userList.filter(el => el.id !== action.payload)
+    },
     updateUserRole(state, action) {
       state.pageNumber = action.payload;
     },
@@ -29,4 +32,4 @@ const usersReducer = createSlice({
 });
 
 export default usersReducer.reducer;
-export const { addUser, updateUserRole } = usersReducer.actions;
+export const { addUser, removeUser, updateUserRole } = usersReducer.actions;

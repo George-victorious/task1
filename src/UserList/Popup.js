@@ -2,9 +2,9 @@ import React, {useState} from 'react';
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import {createPortal} from "react-dom";
-import { addUser } from "../storage/usersReducer";
+import { addUser, removeUser } from "../storage/usersReducer";
 
-const Popup = ({ propsUser, onClose }) => {
+const Popup = ({ isOldUser, propsUser, onClose }) => {
   const [user, setUser] = useState(propsUser);
 
   const setFirstName = e => setUser({...user, firstName: e.target.value});
@@ -17,7 +17,11 @@ const Popup = ({ propsUser, onClose }) => {
   const addUserToList = () => {
     dispatch(addUser(user));
     onClose();
-  }
+  };
+  const removeUserFromList = () => {
+    dispatch(removeUser(user.id));
+    onClose();
+  };
 
   return createPortal(
     <>
@@ -32,7 +36,8 @@ const Popup = ({ propsUser, onClose }) => {
           <option value={'admin'}>Admin</option>
         </select>
         <button onClick={addUserToList} >save</button>
-        <button onClick={onClose} >close</button>
+        {isOldUser && <button onClick={removeUserFromList} >delete</button>}
+        <button onClick={onClose} >cancel</button>
       </Form>
     </>
   ,document.getElementById('popup'));
