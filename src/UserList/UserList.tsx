@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import {useSelector} from "react-redux";
 import Popup from "./Popup";
 import Typography from "../shared/Typotraphy";
-import style from "../styles/userList.module.scss";
+import "../styles/userList.scss";
 import {TUser} from "../storage/types";
 import {getUserList} from "../storage/selectors";
 
@@ -33,11 +33,7 @@ const UserList = () => {
     <>
       {userList.length ? (
         userList.map((user: TUser, index: number) => (
-          <div
-            className={style["user-row"]}
-            key={user.email}
-            onClick={() => setPopupUser(user)}
-          >
+          <div className="user-row" key={user.email} onClick={() => setPopupUser(user)}>
             <Typography level={"h3"}>{user.firstName + " " + user.lastName}</Typography>
             <Typography level={"p"}>{user.email}</Typography>
             <Typography level={"p"}>{user.role}</Typography>

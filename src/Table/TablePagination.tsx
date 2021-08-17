@@ -1,5 +1,5 @@
 import React from "react";
-import style from "../styles/table.module.scss";
+import "../styles/table.scss";
 import {PaginationButtonsComponentProps} from "../storage/types";
 
 const PaginationButtonsComponent = ({
@@ -21,7 +21,7 @@ const PaginationButtonsComponent = ({
   }
 
   return (
-    <div className={style["pagination-block"]}>
+    <div className="pagination-block">
       <button
         className="button-pagination"
         onClick={() => (current > 0 ? setPage(current - 1) : null)}

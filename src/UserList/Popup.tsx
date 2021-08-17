@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import {useDispatch} from "react-redux";
 import {createPortal} from "react-dom";
 import {addUser, removeUser} from "../storage/usersReducer";
-import style from "../styles/popup.module.scss";
+import "../styles/popup.scss";
 import {TInputValidation, TPopup} from "../storage/types";
 
 const Popup = ({isOldUser, propsUser, onClose}: TPopup) => {
@@ -46,8 +46,8 @@ const Popup = ({isOldUser, propsUser, onClose}: TPopup) => {
 
   return createPortal(
     <>
-      <div className={style.blackout} onClick={onClose} />
-      <div className={style.form}>
+      <div className="blackout" onClick={onClose} />
+      <div className="form">
         <input
           className={inputValidation.firstName === false ? "error" : ""}
           placeholder={"First name"}

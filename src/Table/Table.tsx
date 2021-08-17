@@ -3,12 +3,11 @@ import {Table, Column, HeaderCell, Cell} from "rsuite-table";
 import "rsuite-table/dist/css/rsuite-table.css";
 import {setPage} from "../storage/postsReducer";
 import {useDispatch, useSelector} from "react-redux";
-import style from "../styles/table.module.scss";
+import "../styles/table.scss";
 import {getPosts} from "../functions/requests";
 import TablePagination from "./TablePagination";
 import {CellProps} from "rsuite-table/lib/Cell";
 import {getPageNumber, getPagesCount, getPostsOnPage} from "../storage/selectors";
-import makeRequest from "../functions/requestWrapper";
 
 const DateCell = ({rowData, ...props}: CellProps) => (
   <Cell {...props}>
@@ -25,7 +24,7 @@ const DateCell = ({rowData, ...props}: CellProps) => (
 const KeywordsCell = ({rowData, ...props}: any) => (
   <Cell {...props}>
     {rowData.keywords.map((keyword: string) => (
-      <div className={style.keyword} key={keyword}>
+      <div className="keyword" key={keyword}>
         {keyword}
       </div>
     ))}
@@ -34,7 +33,7 @@ const KeywordsCell = ({rowData, ...props}: any) => (
 
 const TableComponent = () => {
   const pageNumber = useSelector(getPageNumber);
-  const posts = useSelector(getPostsOnPage(pageNumber));
+  const posts = useSelector(getPostsOnPage);
   const pagesCount = useSelector(getPagesCount);
 
   const dispatch = useDispatch();
@@ -44,10 +43,6 @@ const TableComponent = () => {
   );
 
   useEffect(() => {
-    makeRequest(
-      "v3/streams/contents?streamId=feed/https://www.fca.org.uk/news/rss.xml&unreadOnly=False",
-      "get"
-    );
     dispatch(getPosts());
   }, [dispatch]);
 
