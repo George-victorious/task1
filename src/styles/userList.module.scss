@@ -1,0 +1,24 @@
+.user-row {
+  padding: 10px;
+  display: flex;
+  background-color: #B2A2B9;
+  border-top: 1px solid black;
+  &:nth-child(odd) {
+    background-color: #E2DCE5;
+  }
+  &:first-child {
+    border: 0;
+  }
+  & :nth-child(n) {
+    width: 33.333%;
+    text-align: center;
+    border-left: 1px solid black;
+  }
+  & :first-child {
+    border: 0;
+  }
+}
+
+.qwerty {
+  background-color: #3b49d1;
+}

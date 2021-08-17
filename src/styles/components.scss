@@ -1,0 +1,70 @@
+@import "variables";
+
+%button {
+  padding: 5px 15px;
+  border: 0;
+  border-radius: 25px;
+  color: #fff;
+}
+
+.button-primary {
+  @extend %button;
+  background-color: $primary;
+  &:hover {
+    background-color: $secondary;
+  }
+  &:active {
+    background-color: $additional;
+  }
+}
+
+.button-secondary {
+  @extend %button;
+  background-color: $primary-gray;
+  &:hover {
+    background-color: $secondary-gray;
+  }
+  &:active {
+    background-color: $additional-gray;
+  }
+}
+
+.button-pagination {
+  background-color: #fff;
+  border: 1px solid $secondary;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+
+  &.active {
+    background-color: $primary;
+  }
+}
+
+input {
+  padding: 5px 15px;
+  border: 1px solid $secondary-gray;
+  border-radius: 25px;
+  outline: none;
+
+  &:focus {
+    border-color: $primary;
+  }
+  &.error {
+    border-color: #f24141;
+  }
+}
+
+select {
+  padding: 5px 15px;
+  border: 1px solid #a8b2b6;
+  border-radius: 25px;
+  outline: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+
+  &:focus {
+    border-color: #3b49d1;
+  }
+}
