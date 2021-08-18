@@ -1,5 +1,4 @@
 import {BrowserRouter, Route} from "react-router-dom";
-
 import {Table} from "./Table";
 import {UserList as Users} from "./UserList";
 import HeaderComponent from "./Header";

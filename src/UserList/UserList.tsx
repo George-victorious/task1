@@ -1,10 +1,11 @@
 import React, {useState} from "react";
 import {useSelector} from "react-redux";
-import styled from "styled-components";
 import Popup from "./Popup";
 import Typography from "../shared/Typotraphy";
-import Button from "../shared/Button";
-
+import "../styles/userList.scss";
+import {TUser} from "../storage/types";
+import {getUserList} from "../storage/selectors";
+import Typogr from "../shared/newTypography";
 const UserList = () => {
   const emptyUser = {
     id: new Date().getTime(),
@@ -14,9 +15,9 @@ const UserList = () => {
     role: "user",
   };
 
-  const userList = useSelector((state) => state.users.userList);
+  const userList = useSelector(getUserList);
 
-  const [popupUser, setPopupUser] = useState(null);
+  const [popupUser, setPopupUser] = useState<typeof emptyUser | null>(null);
   const [isOldUser, setIsOldUser] = useState(true);
 
   const openPopup = () => {
@@ -31,12 +32,12 @@ const UserList = () => {
   return (
     <>
       {userList.length ? (
-        userList.map((user, index) => (
-          <UserRow key={user.email} uneven={index % 2} onClick={() => setPopupUser(user)}>
-            <Typography level={"h3"}>{user.firstName + " " + user.lastName}</Typography>
+        userList.map((user: TUser, index: number) => (
+          <div className="user-row" key={user.email} onClick={() => setPopupUser(user)}>
+            <Typogr.XMedium>{user.firstName + " " + user.lastName}</Typogr.XMedium>
             <Typography level={"p"}>{user.email}</Typography>
             <Typography level={"p"}>{user.role}</Typography>
-          </UserRow>
+          </div>
         ))
       ) : (
         <Typography
@@ -46,34 +47,14 @@ const UserList = () => {
           No users yet.
         </Typography>
       )}
-      <Button onClick={openPopup} style={{marginTop: "20px"}}>
+      <button className="button-primary" onClick={openPopup} style={{marginTop: "20px"}}>
         Add user
-      </Button>
+      </button>
       {popupUser && (
         <Popup isOldUser={isOldUser} propsUser={popupUser} onClose={closePopup} />
       )}
     </>
   );
 };
-
-const UserRow = styled.div`
-  padding: 10px;
-  display: flex;
-  background-color: ${(props) => (props.uneven ? "#E2DCE5" : "#B2A2B9")};
-  border-top: 1px solid black;
-
-  &:first-child {
-    border: 0;
-  }
-
-  & :nth-child(n) {
-    width: 33.333%;
-    text-align: center;
-    border-left: 1px solid black;
-  }
-  & :first-child {
-    border: 0;
-  }
-`;
 
 export default UserList;
