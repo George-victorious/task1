@@ -3,16 +3,21 @@ import {useDispatch} from "react-redux";
 import {createPortal} from "react-dom";
 import {addUser, removeUser} from "../storage/usersReducer";
 import "../styles/popup.scss";
-import {TInputValidation, TPopup} from "../storage/types";
+import {TInputValidation, TPopup, TUser} from "../storage/types";
 
 const Popup = ({isOldUser, propsUser, onClose}: TPopup) => {
-  const [user, setUser] = useState(propsUser);
+  const [user, setUser] = useState<TUser>(propsUser);
+  const [photo, setPhoto] = useState("");
   const [inputValidation, setInputValidation] = useState<TInputValidation>({
     firstName: undefined,
     lastName: undefined,
     email: undefined,
   });
 
+  const setUserPhoto = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPhoto(URL.createObjectURL(e.target.files?.[0]));
+    console.log(e.target.files?.[0]?.name);
+  };
   const setFirstName = (e: React.ChangeEvent<HTMLInputElement>) =>
     setUser({...user, firstName: e.target.value});
   const setLastName = (e: React.ChangeEvent<HTMLInputElement>) =>
@@ -26,9 +31,9 @@ const Popup = ({isOldUser, propsUser, onClose}: TPopup) => {
 
   const addUserToList = () => {
     let validation = {
-      firstName: user.firstName.length < 2,
-      lastName: user.lastName.length < 2,
-      email: user.email.length < 5,
+      firstName: user.firstName.length > 2,
+      lastName: user.lastName.length > 2,
+      email: user.email.length > 5,
     };
     setInputValidation(validation);
     for (const [, value] of Object.entries(validation)) {
@@ -48,6 +53,15 @@ const Popup = ({isOldUser, propsUser, onClose}: TPopup) => {
     <>
       <div className="blackout" onClick={onClose} />
       <div className="form">
+        <input
+          type="file"
+          onChange={setUserPhoto}
+          style={
+            photo
+              ? {backgroundImage: `url(${photo})`, backgroundSize: "cover"}
+              : undefined
+          }
+        />
         <input
           className={inputValidation.firstName === false ? "error" : ""}
           placeholder={"First name"}

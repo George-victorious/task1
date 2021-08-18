@@ -50,8 +50,20 @@ input {
   &:focus {
     border-color: $primary;
   }
+
   &.error {
     border-color: #f24141;
+  }
+
+  &[type=file] {
+    height: 300px;
+    background: url('https://cdn1.iconfinder.com/data/icons/hawcons/32/698394-icon-130-cloud-upload-512.png') center center no-repeat #e4e4e4;
+    background-size: 60px;
+    color: transparent;
+    cursor: pointer;
+    &::file-selector-button {
+      display: none;
+    }
   }
 }
 

@@ -5,7 +5,7 @@ import Typography from "../shared/Typotraphy";
 import "../styles/userList.scss";
 import {TUser} from "../storage/types";
 import {getUserList} from "../storage/selectors";
-
+import Typogr from "../shared/newTypography";
 const UserList = () => {
   const emptyUser = {
     id: new Date().getTime(),
@@ -34,7 +34,7 @@ const UserList = () => {
       {userList.length ? (
         userList.map((user: TUser, index: number) => (
           <div className="user-row" key={user.email} onClick={() => setPopupUser(user)}>
-            <Typography level={"h3"}>{user.firstName + " " + user.lastName}</Typography>
+            <Typogr.XMedium>{user.firstName + " " + user.lastName}</Typogr.XMedium>
             <Typography level={"p"}>{user.email}</Typography>
             <Typography level={"p"}>{user.role}</Typography>
           </div>
