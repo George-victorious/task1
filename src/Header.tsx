@@ -15,6 +15,9 @@ const HeaderComponent = () => {
         <NavLink className="styledNavLink" exact to={"/users"}>
           Users
         </NavLink>
+        <NavLink className="styledNavLink" exact to={"/map"}>
+          Map
+        </NavLink>
       </div>
     </div>
   );
