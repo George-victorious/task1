@@ -1,0 +1,17 @@
+@import "./components";
+
+.keyword {
+  width: min-content;
+  padding: 5px 10px;
+  border-radius: 20px;
+  background-color: $primary-gray;
+}
+
+
+
+.pagination-block {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 3px;
+}
